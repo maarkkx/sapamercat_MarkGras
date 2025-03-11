@@ -1,3 +1,5 @@
+package model;
+
 public class Textil extends Producte {
     String compTextil;
 
@@ -12,5 +14,15 @@ public class Textil extends Producte {
 
     public void setCompTextil(String compTextil) {
         this.compTextil = compTextil;
+    }
+
+    @Override
+    public String toString() {
+        return "Textil{" +
+                "compTextil='" + compTextil + '\'' +
+                ", preu=" + preu +
+                ", nom='" + nom + '\'' +
+                ", codiBarras='" + codiBarras + '\'' +
+                '}';
     }
 }

@@ -1,3 +1,5 @@
+package model;
+
 abstract class Producte {
     float preu;
     String nom;
@@ -33,12 +35,4 @@ abstract class Producte {
         this.codiBarras = codiBarras;
     }
 
-    @Override
-    public String toString() {
-        return "Producte{" +
-                "preu=" + preu +
-                ", nom='" + nom + '\'' +
-                ", codiBarras='" + codiBarras + '\'' +
-                '}';
-    }
 }

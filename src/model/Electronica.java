@@ -1,3 +1,5 @@
+package model;
+
 public class Electronica extends Producte implements Data {
     int diesGarantia;
 
@@ -20,7 +22,17 @@ public class Electronica extends Producte implements Data {
             return 0;
         } else {
             float preu = getPreu();
-            return preu + getPreu()*(diesGarantia/365f)*0.1f;
+            return preu + preu * (diesGarantia/365f)*0.1f;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Electronica{" +
+                "diesGarantia=" + diesGarantia +
+                ", preu=" + preu +
+                ", nom='" + nom + '\'' +
+                ", codiBarras='" + codiBarras + '\'' +
+                '}';
     }
 }

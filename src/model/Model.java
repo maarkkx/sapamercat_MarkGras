@@ -1,5 +1,7 @@
 package model;
 
+import org.w3c.dom.Text;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -37,21 +39,21 @@ public class Model {
         magatzem.add(new Electronica(175.00f, "Càmera web HD", "3123456789015", 18));
         magatzem.add(new Electronica(45.75f, "Memòria USB 256GB", "4123456789016", 24));
         magatzem.add(new Electronica(349.99f, "Dron amb càmera", "5123456789017", 12));
-        magatzem.add(new Textil(19.99f, "Samarreta de cotó", "1234567890123", "100% Cotó"));
-        magatzem.add(new Textil(39.50f, "Pantalons texans", "2345678901234", "Denim (Cotó 98%, Elastà 2%)"));
-        magatzem.add(new Textil(24.99f, "Jaqueta esportiva", "3456789012345", "Polièster 100%"));
-        magatzem.add(new Textil(49.99f, "Vestit d'estiu", "4567890123456", "Cotó 80%, Lli 20%"));
-        magatzem.add(new Textil(15.75f, "Gorra ajustable", "5678901234567", "Cotó 100%"));
-        magatzem.add(new Textil(99.99f, "Abric de llana", "6789012345678", "Llana 70%, Polièster 30%"));
-        magatzem.add(new Textil(12.99f, "Bufanda d'hivern", "7890123456789", "Acrílic 90%, Llana 10%"));
-        magatzem.add(new Textil(29.99f, "Pijama de màniga llarga", "8901234567890", "Cotó 95%, Elastà 5%"));
-        magatzem.add(new Textil(9.99f, "Mitjons tèrmics", "9012345678901", "Llana 60%, Acrílic 40%"));
-        magatzem.add(new Textil(22.50f, "Guants de cuir", "0123456789012", "Cuir natural 100%"));
-        magatzem.add(new Textil(17.99f, "Corbata de seda", "1123456789013", "Seda 100%"));
-        magatzem.add(new Textil(34.99f, "Dessuadora amb caputxa", "2123456789014", "Cotó 80%, Polièster 20%"));
-        magatzem.add(new Textil(55.00f, "Pantalons de vestir", "3123456789015", "Llana 50%, Polièster 50%"));
-        magatzem.add(new Textil(11.50f, "Cinturó de pell", "4123456789016", "Cuir 100%"));
-        magatzem.add(new Textil(45.99f, "Jersei de caixmir", "5123456789017", "Caixmir 100%"));
+        magatzem.add(new Textil(19.99f, "Samarreta de cotó", "1234567890123", "Cotó"));
+        magatzem.add(new Textil(39.50f, "Pantalons texans", "2345678901234", "Denim"));
+        magatzem.add(new Textil(24.99f, "Jaqueta esportiva", "3456789012345", "Polièster"));
+        magatzem.add(new Textil(49.99f, "Vestit d'estiu", "4567890123456", "Lli"));
+        magatzem.add(new Textil(15.75f, "Gorra ajustable", "5678901234567", "Cotó"));
+        magatzem.add(new Textil(99.99f, "Abric de llana", "6789012345678", "Llana"));
+        magatzem.add(new Textil(12.99f, "Bufanda d'hivern", "7890123456789", "Acrílic"));
+        magatzem.add(new Textil(29.99f, "Pijama de màniga llarga", "8901234567890", "Cotó"));
+        magatzem.add(new Textil(9.99f, "Mitjons tèrmics", "9012345678901", "Llana"));
+        magatzem.add(new Textil(22.50f, "Guants de cuir", "0123456789012", "Cuir natural"));
+        magatzem.add(new Textil(17.99f, "Corbata de seda", "1123456789013", "Seda"));
+        magatzem.add(new Textil(34.99f, "Dessuadora amb caputxa", "2123456789014", "Polièster"));
+        magatzem.add(new Textil(55.00f, "Pantalons de vestir", "3123456789015", "Polièster"));
+        magatzem.add(new Textil(11.50f, "Cinturó de pell", "4123456789016", "Cuir"));
+        magatzem.add(new Textil(45.99f, "Jersei de caixmir", "5123456789017", "Caixmir"));
     }
 
     public static void filtrarCaducitat() {
@@ -63,5 +65,16 @@ public class Model {
         }
         aliments.sort(Comparator.comparing(Alimentacio::getDataCaducitat));
         aliments.forEach(System.out::println);
+    }
+
+    public static void filtrarTextil() {
+        List<Textil> textils = new ArrayList<>();
+        for (Object obj : magatzem) {
+            if (obj instanceof Textil) {
+                textils.add((Textil) obj);
+            }
+        }
+        textils.sort(Comparator.comparing(Textil::getCompTextil));
+        textils.forEach(System.out::println);
     }
 }

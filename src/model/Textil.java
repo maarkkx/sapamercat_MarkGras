@@ -1,6 +1,6 @@
 package model;
 
-public class Textil extends Producte {
+public class Textil extends Producte implements Comparable<Textil> {
     String compTextil;
 
     public Textil(float preu, String nom, String codiBarras, String compTextil) {
@@ -18,11 +18,14 @@ public class Textil extends Producte {
 
     @Override
     public String toString() {
-        return "Textil{" +
-                "compTextil='" + compTextil + '\'' +
-                ", preu=" + preu +
-                ", nom='" + nom + '\'' +
-                ", codiBarras='" + codiBarras + '\'' +
-                '}';
+        return  "Nom: '" + nom + '\'' +
+                " | Preu: " + preu +
+                "€ | Composició Textil: '" + compTextil + '\'' +
+                " | Codi de Barras: '" + codiBarras + '\'';
+    }
+
+    @Override
+    public int compareTo(Textil o) {
+        return 0;
     }
 }

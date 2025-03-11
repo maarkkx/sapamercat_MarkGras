@@ -43,6 +43,7 @@ public class Controlador {
                     break;
 
                 case 3:
+                    Model.filtrarTextil();
                     break;
             }
         }

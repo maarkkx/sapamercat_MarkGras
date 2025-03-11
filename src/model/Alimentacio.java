@@ -39,8 +39,7 @@ public class Alimentacio extends Producte implements Data, Comparable<Alimentaci
         return  "Nom: '" + nom + "\'" +
                 " | Preu: " + preu +
                 "€ | Data de Caducitat: " + dataCaducitat +
-                " | CodiBarras: '" + codiBarras + '\'' +
-                '}';
+                " | CodiBarras: '" + codiBarras + '\'';
     }
 
     @Override

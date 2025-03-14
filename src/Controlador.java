@@ -44,6 +44,7 @@ public class Controlador {
                     break;
 
                 case 2:
+                    Model.mostrarTickets();
                     break;
 
                 case 3:
@@ -158,7 +159,15 @@ public class Controlador {
         View.escriureText("------>    SAPAMERCAT    <------");
         View.escriureText("--------------------------------");
         View.escriureText("Data: " + LocalDate.now() + "\n--------------------------------");
-        Model.passarCaixa();
+
+        float total = Model.passarCaixa();
+
+        String ticket = "\n--------------------------------\n------>    SAPAMERCAT    <------\n--------------------------------" + "\nData: " + LocalDate.now() + "\n--------------------------------\n" + Model.mostrarCarro() + "\n\nTOTAL: " + total + "\n--------------------------------";
+        View.escriureText("\nTOTAL: " + total);
         View.escriureText("--------------------------------");
+
+        Model.setTicket(ticket);
+
+        Model.netejarCarro();
     }
 }

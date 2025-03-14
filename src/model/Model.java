@@ -11,6 +11,8 @@ public class Model {
 
     static Map<Producte, Integer> carro = new HashMap<>();
 
+    static Stack<String> tickets = new Stack<>();
+
     public static void afegirArray() {
         magatzem.add(new Alimentacio(2.59f, "Poma", "1234567890123", LocalDate.of(2025, 5, 10)));
         magatzem.add(new Alimentacio(1.29f, "Plàtan", "2345678901234", LocalDate.of(2025, 4, 20)));
@@ -82,26 +84,43 @@ public class Model {
     }
 
     public static void afegirCarro(Producte o, int quantitat) {
-        carro.put(o, quantitat);
+        if (carro.containsKey(o)) {
+            carro.replace(o, carro.get(o) + quantitat);
+        } else {
+            carro.put(o, quantitat);
+        }
+
     }
 
-    public static void mostrarCarro() {
-
+    public static String mostrarCarro() {
+        String carr = "";
         for (Map.Entry<Producte, Integer> mostrar : carro.entrySet()) {
             Producte prod = mostrar.getKey();
+            carr += "Quantitat: x" + mostrar.getValue()+ " | " + prod.getNom() + " " + prod.getPreu() + "€ | Codi: " + prod.getCodiBarras();
             System.out.println("Quantitat: x" + mostrar.getValue()+ " | " + prod.getNom() + " " + prod.getPreu() + "€ | Codi: " + prod.getCodiBarras());
         }
+        return carr;
     }
 
     public static float passarCaixa() {
-        mostrarCarro();
         float total = 0;
         for (Map.Entry<Producte, Integer> calculartotal : carro.entrySet()) {
             Producte prod = calculartotal.getKey();
             int quantitat = calculartotal.getValue();
             total += prod.getPreu() * quantitat;
         }
-        carro.clear();
         return total;
+    }
+
+    public static void netejarCarro() {
+        carro.clear();
+    }
+
+    public static void setTicket(String ticket) {
+        tickets.add(ticket);
+    }
+
+    public static void mostrarTickets() {
+        tickets.forEach(System.out::println);
     }
 }

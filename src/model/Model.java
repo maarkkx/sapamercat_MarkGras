@@ -123,4 +123,17 @@ public class Model {
     public static void mostrarTickets() {
         tickets.forEach(System.out::println);
     }
+
+    public static void buscarProductes () {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Escriu el codi de barras del producte");
+        String codi = scan.nextLine();
+
+        for (Producte p : magatzem) {
+            if (p.getCodiBarras().equals(codi)) {
+                System.out.println(p);
+                return;
+            }
+        }
+    }
 }

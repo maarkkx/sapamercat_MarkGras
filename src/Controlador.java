@@ -50,6 +50,10 @@ public class Controlador {
                 case 3:
                     Model.filtrarTextil();
                     break;
+
+                case 4:
+                    Model.buscarProductes();
+                    break;
             }
         }
     }

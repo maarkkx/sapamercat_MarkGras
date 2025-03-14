@@ -1,6 +1,8 @@
 package model;
 
-public class Textil extends Producte implements Comparable<Textil> {
+import java.util.Comparator;
+
+public class Textil extends Producte implements Comparator<Textil> {
     String compTextil;
 
     public Textil(float preu, String nom, String codiBarras, String compTextil) {
@@ -25,7 +27,7 @@ public class Textil extends Producte implements Comparable<Textil> {
     }
 
     @Override
-    public int compareTo(Textil o) {
-        return this.compTextil.compareTo(o.compTextil);
+    public int compare(Textil o1, Textil o2) {
+        return o1.getCompTextil().compareTo(o2.getCompTextil());
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 abstract class Producte {
     float preu;
     String nom;
@@ -35,4 +37,15 @@ abstract class Producte {
         this.codiBarras = codiBarras;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Producte producte = (Producte) obj;
+        return Objects.equals(codiBarras, producte.codiBarras);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(codiBarras);
+    }
 }

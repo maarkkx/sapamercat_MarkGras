@@ -19,6 +19,7 @@ public class View {
         escriureText("1- Caducitat");
         escriureText("2- Tiquets de compra");
         escriureText("3- Composició tèxtil");
+        escriureText("4- Buscar Productes");
         escriureText("0- Tornar");
     }
 

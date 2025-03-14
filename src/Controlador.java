@@ -10,7 +10,11 @@ public class Controlador {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int num = -1;
+
+        //afageix els 45 productes a la arraylist de magatzem abans de començar el programa
         Model.afegirArray();
+
+        //menu
         while (num != 0) {
             View.menuInici();
             try {
@@ -44,6 +48,9 @@ public class Controlador {
         }
     }
 
+    /**
+     * Mostra el menu de magatzem desde vista, despres te un switch per poder escollir l'opcio
+     */
     public static void gestioMagatzem() {
         Scanner magatzem = new Scanner(System.in);
         int num2 = -1;
@@ -81,7 +88,9 @@ public class Controlador {
     }
 
 
-
+    /**
+     * Menu de afegir productes, mostra el meno de afegir produtes de la Vista
+     */
     public static void afegirProductesMenu() {
         Scanner productes = new Scanner(System.in);
         int num3 = -1;
@@ -114,6 +123,9 @@ public class Controlador {
         }
     }
 
+    /**
+     * Afageix un objecte de tipus Alimentacio demanant-li dades al usuari
+     */
     public static void afegirAliment() {
         View.escriureText("Escriu les dades del aliment que vols afegir");
 
@@ -151,6 +163,9 @@ public class Controlador {
 
     }
 
+    /**
+     * Afageix productes de tipus Textil segons les dades que dona l'usuari
+     */
     public static void afegirTextil() {
         Scanner afegirtex = new Scanner(System.in);
         try {
@@ -187,6 +202,9 @@ public class Controlador {
 
     }
 
+    /**
+     * Afageix productes de tipus Electronica segons les dades que dona l'usuari
+     */
     public static void afegirElectronica() {
         Scanner afegirElec = new Scanner(System.in);
         try {
@@ -223,6 +241,10 @@ public class Controlador {
         }
     }
 
+    /**
+     * Mostra el ticket amb la llista de tots els productes del carro, el total del preu, la data amb el dia que es fa la
+     * compra y fa un clear del Map de carro
+     */
     public static void caixa() {
         View.escriureText("--------------------------------");
         View.escriureText("------>    SAPAMERCAT    <------");
@@ -240,11 +262,22 @@ public class Controlador {
         Model.netejarCarro();
     }
 
+    /**
+     * Comprova si un numero es negatiu
+     * @param num numero per comprovar (int)
+     * @throws NegatiuException en cas de ser negatiu llença aquesta exepcio
+     */
     public static void negatiu(int num) throws NegatiuException {
         if (num < 0) {
             throw new NegatiuException();
         }
     }
+
+    /**
+     * Comprova si un numero es negatiu
+     * @param num numero per comprovar (float)
+     * @throws NegatiuException en cas de ser negatiu llença aquesta exepcio
+     */
     public static void negatiu(float num) throws NegatiuException {
         if (num < 0) {
             throw new NegatiuException();

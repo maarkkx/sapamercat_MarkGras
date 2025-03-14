@@ -26,6 +26,6 @@ public class Textil extends Producte implements Comparable<Textil> {
 
     @Override
     public int compareTo(Textil o) {
-        return 0;
+        return this.compTextil.compareTo(o.compTextil);
     }
 }

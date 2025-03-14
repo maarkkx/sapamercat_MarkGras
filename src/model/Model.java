@@ -1,12 +1,15 @@
 package model;
 
 import org.w3c.dom.Text;
+import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class Model {
     static ArrayList<Producte> magatzem = new ArrayList<>();
+
+    static Map<Producte, Integer> carro = new HashMap<>();
 
     public static void afegirArray() {
         magatzem.add(new Alimentacio(2.59f, "Poma", "1234567890123", LocalDate.of(2025, 5, 10)));
@@ -76,5 +79,29 @@ public class Model {
         }
         textils.sort(Comparator.comparing(Textil::getCompTextil));
         textils.forEach(System.out::println);
+    }
+
+    public static void afegirCarro(Producte o, int quantitat) {
+        carro.put(o, quantitat);
+    }
+
+    public static void mostrarCarro() {
+
+        for (Map.Entry<Producte, Integer> mostrar : carro.entrySet()) {
+            Producte prod = mostrar.getKey();
+            System.out.println("Quantitat: x" + mostrar.getValue()+ " | " + prod.getNom() + " " + prod.getPreu() + "€ | Codi: " + prod.getCodiBarras());
+        }
+    }
+
+    public static float passarCaixa() {
+        mostrarCarro();
+        float total = 0;
+        for (Map.Entry<Producte, Integer> calculartotal : carro.entrySet()) {
+            Producte prod = calculartotal.getKey();
+            int quantitat = calculartotal.getValue();
+            total += prod.getPreu() * quantitat;
+        }
+        carro.clear();
+        return total;
     }
 }

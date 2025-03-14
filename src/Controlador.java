@@ -2,6 +2,8 @@ import model.*;
 import view.View;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Controlador {
@@ -11,7 +13,17 @@ public class Controlador {
         Model.afegirArray();
         while (num != 0) {
             View.menuInici();
-            num = scan.nextInt();
+            try {
+                num = scan.nextInt();
+                negatiu(num);
+            } catch (InputMismatchException error) {
+                View.escriureText("Has d'introduir un numero enter");
+            } catch (NegatiuException error2) {
+                View.escriureText("No es poden introduir valors negatius");
+            } finally {
+                scan.nextLine();
+            }
+
             switch (num) {
                 case 1:
                     gestioMagatzem();
@@ -37,7 +49,17 @@ public class Controlador {
         int num2 = -1;
         while (num2 != 0) {
             View.menuMagatzem();
-            num2 = magatzem.nextInt();
+            try {
+                num2 = magatzem.nextInt();
+                negatiu(num2);
+            } catch (InputMismatchException error) {
+                View.escriureText("Has d'introduir un numero enter");
+            } catch (NegatiuException error2) {
+                View.escriureText("No es poden introduir valors negatius");
+            } finally {
+                magatzem.nextLine();
+            }
+
             switch (num2) {
                 case 1:
                     Model.filtrarCaducitat();
@@ -65,7 +87,16 @@ public class Controlador {
         int num3 = -1;
         while (num3 != 0) {
             View.menuProducte();
-            num3 = productes.nextInt();
+            try {
+                num3 = productes.nextInt();
+                negatiu(num3);
+            } catch (InputMismatchException error) {
+                View.escriureText("Has d'introduir un numero enter");
+            } catch (NegatiuException error2) {
+                View.escriureText("No es poden introduir valors negatius");
+            } finally {
+                productes.nextLine();
+            }
             switch (num3) {
                 case 1:
                     afegirAliment();
@@ -88,74 +119,108 @@ public class Controlador {
 
         View.escriureText("Preu:");
         Scanner afegirAliment = new Scanner(System.in);
-        float preuAliment = afegirAliment.nextFloat();
-        afegirAliment.nextLine();
+        try {
+            float preuAliment = afegirAliment.nextFloat();
+            afegirAliment.nextLine();
+            negatiu(preuAliment);
+            View.escriureText("Nom del producte:");
+            String nomAliment = afegirAliment.nextLine();
 
-        View.escriureText("Nom del producte:");
-        String nomAliment = afegirAliment.nextLine();
+            View.escriureText("Codi de barras:");
+            String codiAliment = afegirAliment.nextLine();
 
-        View.escriureText("Codi de barras:");
-        String codiAliment = afegirAliment.nextLine();
+            View.escriureText("Data de caducitat (YYYY-MM-DD):");
+            LocalDate dataAliment = LocalDate.parse(afegirAliment.nextLine().trim());
 
-        View.escriureText("Data de caducitat (YYYY-MM-DD):");
-        LocalDate dataAliment = LocalDate.parse(afegirAliment.nextLine().trim());
+            View.escriureText("Quantitat que vols afegir al carro:");
+            int quantitat = afegirAliment.nextInt();
+            negatiu(quantitat);
 
-        View.escriureText("Quantitat que vols afegir al carro:");
-        int quantitat = afegirAliment.nextInt();
+            Alimentacio prod = new Alimentacio(preuAliment, nomAliment, codiAliment, dataAliment);
 
-        Alimentacio prod = new Alimentacio(preuAliment, nomAliment, codiAliment, dataAliment);
+            Model.afegirCarro(prod, quantitat);
+        } catch (InputMismatchException error){
+            View.escriureText("Has introduit un tipus de dada erroni. Torna a crear el producte.");
+        } catch (DateTimeParseException error2){
+            View.escriureText("El format de la data no correspon amb el exemple, torna a crear el producte");
+        } catch (NegatiuException error3) {
+            View.escriureText("No es poden introduir valors negatius");
+        } finally {
+            afegirAliment.nextLine();
+        }
 
-        Model.afegirCarro(prod, quantitat);
     }
 
     public static void afegirTextil() {
-        View.escriureText("Escriu les dades del textil que vols afegir");
-
-        View.escriureText("Preu:");
         Scanner afegirtex = new Scanner(System.in);
-        float preuText = afegirtex.nextFloat();
-        afegirtex.nextLine();
+        try {
+            View.escriureText("Escriu les dades del textil que vols afegir");
 
-        View.escriureText("Nom del producte:");
-        String nomText = afegirtex.nextLine();
+            View.escriureText("Preu:");
+            float preuText = afegirtex.nextFloat();
+            negatiu(preuText);
+            afegirtex.nextLine();
 
-        View.escriureText("Codi de barras:");
-        String codiText = afegirtex.nextLine();
+            View.escriureText("Nom del producte:");
+            String nomText = afegirtex.nextLine();
 
-        View.escriureText("Compocició textil:");
-        String compocicio = afegirtex.nextLine();
+            View.escriureText("Codi de barras:");
+            String codiText = afegirtex.nextLine();
 
-        View.escriureText("Quantitat que vols afegir al carro:");
-        int quantitat = afegirtex.nextInt();
+            View.escriureText("Compocició textil:");
+            String compocicio = afegirtex.nextLine();
 
-        Textil prod = new Textil(preuText, nomText, codiText, compocicio);
+            View.escriureText("Quantitat que vols afegir al carro:");
+            int quantitat = afegirtex.nextInt();
+            negatiu(quantitat);
 
-        Model.afegirCarro(prod, quantitat);
+            Textil prod = new Textil(preuText, nomText, codiText, compocicio);
+
+            Model.afegirCarro(prod, quantitat);
+        } catch (InputMismatchException error){
+            View.escriureText("Has introduit un tipus de dada erroni. Torna a crear el producte.");
+        } catch (NegatiuException error2) {
+        View.escriureText("No es poden introduir valors negatius");
+        } finally {
+            afegirtex.nextLine();
+        }
+
     }
 
     public static void afegirElectronica() {
-        View.escriureText("Escriu les dades del producte electronic que vols afegir");
-
-        View.escriureText("Preu:");
         Scanner afegirElec = new Scanner(System.in);
-        float preuElec = afegirElec.nextFloat();
-        afegirElec.nextLine();
+        try {
+            View.escriureText("Escriu les dades del producte electronic que vols afegir");
 
-        View.escriureText("Nom del producte:");
-        String nomElec = afegirElec.nextLine();
+            View.escriureText("Preu:");
 
-        View.escriureText("Codi de barras:");
-        String codiElec = afegirElec.nextLine();
+            float preuElec = afegirElec.nextFloat();
+            negatiu(preuElec);
+            afegirElec.nextLine();
 
-        View.escriureText("Dies de garantia (ex: 5):");
-        int dies = afegirElec.nextInt();
+            View.escriureText("Nom del producte:");
+            String nomElec = afegirElec.nextLine();
 
-        View.escriureText("Quantitat que vols afegir al carro:");
-        int quantitat = afegirElec.nextInt();
+            View.escriureText("Codi de barras:");
+            String codiElec = afegirElec.nextLine();
 
-        Electronica prod = new Electronica(preuElec, nomElec, codiElec, dies);
+            View.escriureText("Dies de garantia (ex: 5):");
+            int dies = afegirElec.nextInt();
 
-        Model.afegirCarro(prod, quantitat);
+            View.escriureText("Quantitat que vols afegir al carro:");
+            int quantitat = afegirElec.nextInt();
+            negatiu(quantitat);
+
+            Electronica prod = new Electronica(preuElec, nomElec, codiElec, dies);
+
+            Model.afegirCarro(prod, quantitat);
+        } catch (InputMismatchException error){
+            View.escriureText("Has introduit un tipus de dada erroni. Torna a crear el producte.");
+        } catch (NegatiuException error2) {
+            View.escriureText("No es poden introduir valors negatius");
+        } finally {
+            afegirElec.nextLine();
+        }
     }
 
     public static void caixa() {
@@ -173,5 +238,16 @@ public class Controlador {
         Model.setTicket(ticket);
 
         Model.netejarCarro();
+    }
+
+    public static void negatiu(int num) throws NegatiuException {
+        if (num < 0) {
+            throw new NegatiuException();
+        }
+    }
+    public static void negatiu(float num) throws NegatiuException {
+        if (num < 0) {
+            throw new NegatiuException();
+        }
     }
 }

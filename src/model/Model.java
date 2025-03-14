@@ -89,6 +89,14 @@ public class Model {
         } else {
             carro.put(o, quantitat);
         }
+        if (carro.size() > 100) {
+            try {
+                throw new LimitProductesException();
+            } catch (LimitProductesException error) {
+                System.out.println("Si vols comprar més has de passar per caixa");
+            }
+
+        }
 
     }
 
